@@ -1,8 +1,13 @@
 package com.thoughtworks.parkinglot.entity;
 
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Setter
+@NoArgsConstructor
 public class Basement {
 
     @Id
@@ -14,4 +19,9 @@ public class Basement {
 
     @Column
     private long available;
+
+    public Basement(long capacity) {
+        this.capacity = capacity;
+    }
+
 }
