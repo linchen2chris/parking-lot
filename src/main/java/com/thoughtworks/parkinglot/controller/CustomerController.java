@@ -1,13 +1,14 @@
 package com.thoughtworks.parkinglot.controller;
 
-import java.util.Optional;
 import com.thoughtworks.parkinglot.entity.Customer;
 import com.thoughtworks.parkinglot.repository.CustomerRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
+@RequestMapping("/api/v2/customer")
 class CustomerController {
 	@Autowired
 	private CustomerRepository customerRepository;

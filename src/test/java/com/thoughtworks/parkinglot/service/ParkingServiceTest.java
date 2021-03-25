@@ -1,20 +1,34 @@
 package com.thoughtworks.parkinglot.service;
 
 import com.thoughtworks.parkinglot.entity.Basement;
+import com.thoughtworks.parkinglot.entity.Garage;
 import com.thoughtworks.parkinglot.entity.Ticket;
 import com.thoughtworks.parkinglot.model.Car;
+import com.thoughtworks.parkinglot.repository.BasementRepository;
+import com.thoughtworks.parkinglot.repository.GarageRepository;
 import com.thoughtworks.parkinglot.repository.TicketRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 class ParkingServiceTest {
+
+    @Mock
+    TicketRepository mockTickRepository;
+
+    @Mock
+    GarageRepository garageRepository;
+    @Mock
+    BasementRepository basementRepository;
+
+    @InjectMocks
+    ParkingService parkingService;
 
     @Test
     public void testDemo() {
@@ -23,17 +37,18 @@ class ParkingServiceTest {
 
     @Test
     public void testCarParkingSuccess() {
-        Basement basement = new Basement(50);
         Car car = new Car("S12344");
 
-        TicketRepository mockTickRepo = mock(TicketRepository.class);
-        when(mockTickRepo.save(Mockito.any(Ticket.class))).thenReturn(new Ticket("MockCar"));
+        when(mockTickRepository.save(Mockito.any(Ticket.class))).thenReturn(new Ticket("MockCar", 1L, 2L));
+        when(garageRepository.save(Mockito.any(Garage.class))).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
+        when(garageRepository.findFirstByAvailableIsTrue()).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
+        when(basementRepository.save(Mockito.any(Basement.class))).thenReturn(new Basement());
 
-        ParkingService parkingService = new ParkingService(mockTickRepo);
         Ticket ticket = parkingService.park(car);
 
         assertEquals(ticket.getLicense(), "MockCar");
+
+        verify(mockTickRepository, only()).save(Mockito.any(Ticket.class));
+        // verify(garageRepository, only()).save(Mockito.any(Garage.class));
     }
-
-
 }

@@ -14,13 +14,21 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private String license;
 
+    @Column
+    private Long garageID;
 
-    public Ticket (String license) {
+    @Column
+    private Long basementID;
+
+
+    public Ticket (String license, Long garageID, Long basementID) {
         this.license = license;
+        this.garageID = garageID;
+        this.basementID = basementID;
     }
 }
