@@ -36,7 +36,7 @@ public class Basement {
 
     public void initAllGarage() {
         for (int i = 0; i < this.capacity; i++) {
-            Garage garage = new Garage(true, null);
+            Garage garage = new Garage(true);
             garage_list.add(garage);
             garage.setBasement(this);
         }

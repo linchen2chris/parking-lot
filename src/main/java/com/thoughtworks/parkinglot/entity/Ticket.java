@@ -3,11 +3,13 @@ package com.thoughtworks.parkinglot.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ticket {
@@ -20,15 +22,15 @@ public class Ticket {
     private String license;
 
     @Column
-    private Long garageID;
+    private Long garageId;
 
     @Column
-    private Long basementID;
+    private Long basementId;
 
 
-    public Ticket (String license, Long garageID, Long basementID) {
+    public Ticket (String license, Long garageId, Long basementId) {
         this.license = license;
-        this.garageID = garageID;
-        this.basementID = basementID;
+        this.garageId = garageId;
+        this.basementId = basementId;
     }
 }

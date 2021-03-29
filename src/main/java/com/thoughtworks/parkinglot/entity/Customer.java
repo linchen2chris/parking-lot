@@ -18,6 +18,6 @@ public class Customer {
 	private String firstName;
 
 	@Column
-	private String LastName;
+	private String lastName;
 
 }

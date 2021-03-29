@@ -1,6 +1,5 @@
 package com.thoughtworks.parkinglot.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Garage {
 
@@ -28,9 +26,9 @@ public class Garage {
     private Basement basement;
 
     // constructor
-    public Garage(boolean isAvailable, String license) {
+    public Garage(boolean isAvailable) {
         this.isAvailable = isAvailable;
-        this.license = license;
+        this.license = null;
     }
 
     @Override

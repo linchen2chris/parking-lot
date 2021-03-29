@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GarageRepository extends JpaRepository<Garage, Long> {
 
-    @Query(value="select * from garage where is_available = true limit 1", nativeQuery = true)
-    Garage findFirstByAvailableIsTrue();
+    @Query(value="select * from garage where garage.basement_id = ?1 AND is_available = true limit 1", nativeQuery = true)
+    Garage findFirstByBasementIDAndAvailableIsTrue(Long basementID);
 
+    @Query(value="select * from garage where garage.basement_id = ?1 AND garage.id = ?2", nativeQuery = true)
+    Garage findCarByBasementIdAndGarageId(Long basementId, Long garageId);
 }

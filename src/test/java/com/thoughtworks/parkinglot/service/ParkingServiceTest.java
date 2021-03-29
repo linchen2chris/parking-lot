@@ -1,7 +1,6 @@
 package com.thoughtworks.parkinglot.service;
 
 import com.thoughtworks.parkinglot.entity.Basement;
-import com.thoughtworks.parkinglot.entity.Garage;
 import com.thoughtworks.parkinglot.entity.Ticket;
 import com.thoughtworks.parkinglot.model.Car;
 import com.thoughtworks.parkinglot.repository.BasementRepository;
@@ -40,8 +39,8 @@ class ParkingServiceTest {
         Car car = new Car("S12344");
 
         when(mockTickRepository.save(Mockito.any(Ticket.class))).thenReturn(new Ticket("MockCar", 1L, 2L));
-        when(garageRepository.save(Mockito.any(Garage.class))).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
-        when(garageRepository.findFirstByAvailableIsTrue()).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
+        //when(garageRepository.save(Mockito.any(Garage.class))).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
+        //when(garageRepository.findFirstByAvailableIsTrue()).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
         when(basementRepository.save(Mockito.any(Basement.class))).thenReturn(new Basement());
 
         Ticket ticket = parkingService.park(car);
