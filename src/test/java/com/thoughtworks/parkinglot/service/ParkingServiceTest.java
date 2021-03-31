@@ -38,7 +38,7 @@ class ParkingServiceTest {
     public void testCarParkingSuccess() {
         Car car = new Car("S12344");
 
-        when(mockTickRepository.save(Mockito.any(Ticket.class))).thenReturn(new Ticket("MockCar", 1L, 2L));
+        //when(mockTickRepository.save(Mockito.any(Ticket.class))).thenReturn(new Ticket("MockCar", 1L, 2L));
         //when(garageRepository.save(Mockito.any(Garage.class))).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
         //when(garageRepository.findFirstByAvailableIsTrue()).thenReturn(new Garage(1L,false,  "MockCar", new Basement()));
         when(basementRepository.save(Mockito.any(Basement.class))).thenReturn(new Basement());

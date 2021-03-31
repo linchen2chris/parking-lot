@@ -22,7 +22,7 @@ public class Basement {
     private long capacity;
 
     @Column
-    private long available;
+    private long availability;
 
     @OneToMany(mappedBy = "basement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Garage> garage_list = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Basement {
     // constructor
     public Basement(long capacity) {
         this.capacity = capacity;
-        this.available = capacity;
+        this.availability = capacity;
         this.initAllGarage();
     }
 

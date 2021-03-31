@@ -27,10 +27,14 @@ public class Ticket {
     @Column
     private Long basementId;
 
+    @Column
+    private String staffId;
 
-    public Ticket (String license, Long garageId, Long basementId) {
+
+    public Ticket (String license, Long garageId, Long basementId, String staffId) {
         this.license = license;
         this.garageId = garageId;
         this.basementId = basementId;
+        this.staffId = staffId;
     }
 }

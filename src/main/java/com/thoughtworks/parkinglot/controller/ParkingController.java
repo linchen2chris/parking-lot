@@ -1,8 +1,10 @@
 package com.thoughtworks.parkinglot.controller;
 
 import com.thoughtworks.parkinglot.entity.Ticket;
+import com.thoughtworks.parkinglot.exception.NoAvailableGarageException;
+import com.thoughtworks.parkinglot.exception.NoFreeStaffException;
 import com.thoughtworks.parkinglot.exception.NotFoundCarException;
-import com.thoughtworks.parkinglot.exception.NotFoundTicket;
+import com.thoughtworks.parkinglot.exception.NotFoundTicketException;
 import com.thoughtworks.parkinglot.model.Car;
 import com.thoughtworks.parkinglot.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,17 @@ class ParkingController {
     }
 
     @GetMapping("/park/{license}")
-    public Ticket parkACar(@PathVariable("license") String license) {
+    public String parkACar(@PathVariable("license") String license) {
         Car car = new Car(license);
-        return this.parkingService.park(car);
+        Ticket ticket;
+        try {
+            ticket = this.parkingService.park(car);
+        } catch (NoFreeStaffException e) {
+            return e.getExceptionMessage();
+        } catch (NoAvailableGarageException e) {
+            return e.getExceptionMessage();
+        }
+        return ticket.getId().toString();
     }
 
     @GetMapping("/pick_car/{ticket_id}")
@@ -34,7 +44,7 @@ class ParkingController {
             if (this.parkingService.pick(ticket_id)) return "Pick Up Car Successfully";
         } catch (NotFoundCarException e) {
             return e.getExceptionMessage();
-        } catch (NotFoundTicket e) {
+        } catch (NotFoundTicketException e) {
             return e.getExceptionMessage();
         }
         return "Error";

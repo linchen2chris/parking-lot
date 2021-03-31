@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BasementRepository extends JpaRepository<Basement, Long> {
 
-    @Query(value="select * from basement where available > 0 limit 1", nativeQuery = true)
+    @Query(value="select * from basement where availability > 0 ORDER BY id limit 1", nativeQuery = true)
     Basement findFirstBasementByAvailable();
 
+    @Query(value = "select * from basement where availability > 0 ORDER BY availability DESC limit 1", nativeQuery = true)
+    Basement findBasementWithMostAvailability();
+
+    @Query(value = "select * from basement where id = ?1", nativeQuery = true)
+    Basement findBasementById(Long basement_id);
 }
