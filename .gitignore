@@ -37,3 +37,4 @@ out/
 ### ts version ###
 typescript-version/node_modules
 typescript-version/build
+/node_modules/
