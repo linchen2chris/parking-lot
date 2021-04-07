@@ -34,3 +34,6 @@ out/
 
 ### VS Code ###
 .vscode/
+### ts version ###
+typescript-version/node_modules
+typescript-version/build
